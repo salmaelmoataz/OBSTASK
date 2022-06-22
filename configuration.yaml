@@ -1,0 +1,57 @@
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: juiceshop
+  namespace: ingress-nginx
+  labels:
+    app: juiceshop
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: juiceshop
+  template:
+    metadata:
+      labels:
+        app: juiceshop
+    spec:
+      containers:
+      - name: juice-shop
+        image: bkimminich/juice-shop
+        ports:
+        - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: juiceshopservice
+  namespace: ingress-nginx
+spec:
+  selector:
+    app: juiceshop
+  ports:
+    - protocol: TCP
+      port: 3001
+      targetPort: 3000
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: juiceshopingress
+  namespace: ingress-nginx
+spec:
+  rules:
+  - host:
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: juiceshopservice
+            port:
+              number: 3001
