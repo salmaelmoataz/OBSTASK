@@ -57,6 +57,8 @@ for forth point will attach the configuration file in the repo
 
 apply every file with command(kubectl apply -f $filename)
 
+after finishing, can delete every thing with command(kubectl delete all --all -n ingress-nginx)
+
 
 
 ## Testing Service
