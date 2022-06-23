@@ -36,6 +36,7 @@ we will attach to the cluster EKS Service role with **EKS** trust policy  **Amaz
     - **Role**: Nodes Service role with **AmazonEKSWorkerNodePolicy** & **AmazonEC2ContainerRegistryReadOnly** managed policies.
     - **Subnets** Selecting only the 2 private subnets to place nodes
     - **Scaling Options**: Setting 2 nodes as the min, max & desired capacity
+we will restric ip address by creating security group and apply it to nodes and specify on it range of ip
 
 ## 3- Install ngnix ingress
 from link (https://github.com/kubernetes/ingress-nginx)
